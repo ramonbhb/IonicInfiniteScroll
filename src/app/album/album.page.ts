@@ -1,18 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumService } from '../album.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-album',
   templateUrl: './album.page.html',
   styleUrls: ['./album.page.scss'],
 })
+
 export class AlbumPage implements OnInit {
   photos: any;// 5000 PHOTOS
   photosPage: any[];
   private index: number = 0;
   private readonly offset: number = 10;
+  valordabarra = 0;
 
-  constructor(private albumService: AlbumService) { }
+  constructor(private albumService: AlbumService, private toastController: ToastController) {
+    setInterval(() => {
+      this.valordabarra += .05;
+    }, 1000)
+
+  }
+
+  async mostrarToast() {
+    const toast = await this.toastController.create({
+      message: "Hello World :)",
+      duration: 5000
+    });
+    toast.present();
+  }
 
   async ngOnInit() {
     let response = await this.albumService.getPhotos();

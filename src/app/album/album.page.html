@@ -5,9 +5,20 @@
 </ion-header>
 
 <ion-content>
+  <ion-progress-bar color="primary" [value]="valordabarra"></ion-progress-bar>
+
+  <ion-progress-bar color="primary" value="0.5"></ion-progress-bar>
+  
+  <ion-progress-bar color="secondary" value="0.25" buffer="0.25"></ion-progress-bar>
+  
   <ion-list *ngFor="let photo of photosPage">
       {{ photo.id }}
   </ion-list>
+  <ion-fab vertical="top" (click)="mostrarToast()" [routerLink]="['/folder/inbox']" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
